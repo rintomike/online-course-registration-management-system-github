@@ -1,0 +1,13 @@
+# Matches target/ inside springboot-project/
+**/target/
+*.class
+
+# Matches env.properties inside springboot-project/src/main/resources/
+**/env.properties
+env.properties
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.DS_Store
