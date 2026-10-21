@@ -19,5 +19,11 @@ public class StudentCourse {
     @Column(name = "course_id")
     private Integer courseId;
 
+    public StudentCourse() {}
+
+    public StudentCourse(String studentName, Integer courseId) {
+        this.studentName = studentName;
+        this.courseId = courseId;
+    }
 
 }
