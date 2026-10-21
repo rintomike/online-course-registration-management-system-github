@@ -14,5 +14,5 @@ public class CourseEnrollRequest {
     public void setStudentName(String studentName) { this.studentName = studentName; }
 
     public Integer getCourseId() { return courseId; }
-    public void setCourseId(Integer courseId) { this.coursId = courseId; }
+    public void setCourseId(Integer courseId) { this.courseId = courseId; }
 }

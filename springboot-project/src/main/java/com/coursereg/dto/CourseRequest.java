@@ -17,7 +17,7 @@ public class CourseRequest {
     public void setCourseName(String courseName) { this.courseName = courseName; }
 
     public Integer getDurationDays() { return durationDays; }
-    public vod setDurationDays(Integer durationDays) { this.durationDays = durationDays; }
+    public void setDurationDays(Integer durationDays) { this.durationDays = durationDays; }
 
     public String getCourseType() { return courseType; }
     public void setCourseType(String courseType) { this.courseType = courseType; }
