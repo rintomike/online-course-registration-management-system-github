@@ -23,4 +23,17 @@ public class Course {
     @Column(name = "coursetype")
     private String courseType;
 
+    public Course() {}
+
+    public Integer getCourseId() { return courseId; }
+    public void setCourseId(Integer courseId) { this.courseId = courseId; }
+
+    public String getCourseName() { return courseName; }
+    public void setCourseName(String courseName) { this.courseName = courseName; }
+
+    public Integer getDurationDays() { return durationDays; }
+    public void setDurationDays(Integer durationDays) { this.durationDays = durationDays; }
+
+    public String getCourseType() { return courseType; }
+    public void setCourseType(String courseType) { this.courseType = courseType; }
 }
