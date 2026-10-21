@@ -76,5 +76,28 @@ public class AuthController {
                 })
                 .orElseGet(() -> ResponseEntity.status(404).body(Map.of("status", "not found")));
     }
+
+    //PUT /api/auth/profile/{name} endpoint
+    @PutMapping("/profile/{name}")
+    public ResponseEntity<?> updateProfile(
+            @PathVariable String name,
+            @RequestBody UpdateProfileRequest request) {
+
+        Optional<Student> optionalStudent = studentRepository.findByName(name);
+
+        if (optionalStudent.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Student student = optionalStudent.get();
+        student.setAge(request.getAge());
+        student.setMobileNo(request.getMobileNo());
+        student.setAddress(request.getAddress());
+        studentRepository.save(student);
+
+        return ResponseEntity.ok(
+            Map.of("message", "Profile updated successfully")
+        );
+    }    
     
 }
