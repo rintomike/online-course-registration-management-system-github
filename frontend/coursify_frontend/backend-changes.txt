@@ -1,0 +1,55 @@
+BACKEND ADDITIONS
+
+1. Create UpdateProfileRequest.java:
+
+public class UpdateProfileRequest {
+    private Integer age;
+    private String mobileNo;
+    private String address;
+
+    public UpdateProfileRequest() {}
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) { this.age = age; }
+    public String getMobileNo() { return mobileNo; }
+    public void setMobileNo(String mobileNo) { this.mobileNo = mobileNo; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+}
+
+2. In StudentRepository.java add:
+
+Optional<Student> findByName(String name);
+
+and import java.util.Optional;
+
+3. In AuthController.java add the imports for PutMapping, PathVariable, RequestBody, ResponseEntity, Map and then add:
+
+@PutMapping("/profile/{name}")
+public ResponseEntity<?> updateProfile(
+        @PathVariable String name,
+        @RequestBody UpdateProfileRequest request) {
+
+    Optional<Student> optionalStudent = studentRepository.findByName(name);
+
+    if (optionalStudent.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    Student student = optionalStudent.get();
+    student.setAge(request.getAge());
+    student.setMobileNo(request.getMobileNo());
+    student.setAddress(request.getAddress());
+    studentRepository.save(student);
+
+    return ResponseEntity.ok(
+        Map.of("message", "Profile updated successfully")
+    );
+}
+
+Use your existing package/imports and repository injection. If Student uses different Java field types/names, match those types/names.
+
+The frontend uses:
+GET  http://localhost:8080/api/auth/profile/{username}
+PUT  http://localhost:8080/api/auth/profile/{username}
+
+Because Live Server and Spring Boot are different origins, ensure your Spring Boot CORS configuration allows the Live Server origin (commonly http://127.0.0.1:5500 and/or http://localhost:5500).
