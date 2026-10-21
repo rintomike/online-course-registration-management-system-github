@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Admin Dashboard | COURSIFY</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body class="dashboard-page">
+
+  <header class="top-navbar">
+    <button class="icon-button menu-button" type="button"
+            aria-label="Open navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <a class="brand-logo" href="admin-dashboard.html">COURSIFY</a>
+
+    <div class="navbar-right">
+      <span class="administrator-badge">
+        <span class="status-dot"></span>
+        Administrator
+      </span>
+
+      <button
+        class="outline-button"
+        id="logout-button"
+        type="button"
+      >Sign out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+
+    <section class="dashboard-hero">
+      <p class="eyebrow">YOUR ADMIN WORKSPACE</p>
+      <h1>Course Catalog</h1>
+      <p class="hero-subtitle">
+        Create, organize, and manage your courses in one place.
+      </p>
+
+      <div class="catalog-summary">
+        <span class="summary-label">Total courses</span>
+        <span class="course-count-badge" id="course-count">0 courses</span>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+
+      <article class="panel add-course-panel">
+        <div class="panel-heading">
+          <div class="panel-icon" aria-hidden="true">
+            <span>+</span>
+          </div>
+
+          <div>
+            <h2>Add a course</h2>
+            <p>Introduce a new course to your catalog.</p>
+          </div>
+        </div>
+
+        <form id="course-form">
+          <div class="form-group">
+            <label for="course-name">Course name</label>
+            <input
+              type="text"
+              id="course-name"
+              name="courseName"
+              placeholder="e.g. Web Development"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="course-duration">Duration (days)</label>
+            <input
+              type="number"
+              id="course-duration"
+              name="durationDays"
+              placeholder="e.g. 30"
+              min="1"
+              step="1"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="course-type">Course type</label>
+            <select id="course-type" name="courseType" required>
+              <option value="" disabled selected>Select course type</option>
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+
+          <p
+            class="form-message"
+            id="course-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+          <button
+            class="primary-button"
+            id="add-course-button"
+            type="submit"
+          >
+            <span class="button-plus" aria-hidden="true">+</span>
+            Add course
+          </button>
+        </form>
+      </article>
+
+      <article class="panel catalog-panel">
+        <div class="panel-heading catalog-heading">
+          <div class="panel-icon" aria-hidden="true">
+            <span>▤</span>
+          </div>
+
+          <div class="catalog-title">
+            <h2>In your catalog</h2>
+            <p>All your courses, neatly organized.</p>
+          </div>
+
+          <button
+            class="refresh-button"
+            id="refresh-button"
+            type="button"
+            aria-label="Refresh course catalog"
+            title="Refresh courses"
+          >
+            ↻
+          </button>
+        </div>
+
+        <p
+          class="form-message catalog-message"
+          id="catalog-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <div class="course-list" id="course-list">
+          <div class="empty-state">
+            <div class="empty-state-icon" aria-hidden="true">＋</div>
+            <h3>Your catalog is ready</h3>
+            <p>Your courses will appear here once they are added.</p>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="page-footer">
+      © <span id="current-year"></span> COURSIFY. All rights reserved.
+    </footer>
+
+  </main>
+
+</body>
+</html>

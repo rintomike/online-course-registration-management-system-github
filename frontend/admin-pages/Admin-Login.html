@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Admin Login | COURSIFY</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body class="login-page">
+
+  <header class="top-navbar">
+    <button class="icon-button menu-button" type="button"
+            aria-label="Open navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <a class="brand-logo" href="admin-login.html">COURSIFY</a>
+
+    <a class="navbar-action" href="#login-card">Admin Portal</a>
+  </header>
+
+  <main class="login-main">
+    <section class="hero-section">
+      <p class="eyebrow">ADMINISTRATION WORKSPACE</p>
+
+      <h1>
+        Login To Your Admin Account<br class="desktop-break">
+        To Manage Courses
+      </h1>
+
+      <p class="hero-subtitle">
+        Sign in to continue to your COURSIFY administration workspace.
+      </p>
+    </section>
+
+    <section class="login-card" id="login-card">
+      <div class="card-heading">
+        <div class="brand-mark" aria-hidden="true">
+          <span>C</span>
+        </div>
+        <h2>Admin Login</h2>
+        <p>Welcome back! Please enter your details.</p>
+      </div>
+
+      <form id="login-form" autocomplete="on">
+        <div class="form-group">
+          <label for="admin-name">Administrator Name</label>
+          <input
+            type="text"
+            id="admin-name"
+            name="name"
+            placeholder="Administrator Username or Email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="admin-password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              class="password-toggle"
+              id="password-toggle"
+              type="button"
+              aria-controls="admin-password"
+              aria-label="Show password"
+              aria-pressed="false"
+            >Show</button>
+          </div>
+        </div>
+        
+        <div class="forgot">
+          <button
+            class="button-forgot"
+            id="forgot-password"
+            type="button"
+            aria-controls="forgot-password"
+            aria-label="forgot-password?"
+            aria-pressed="false"
+            >Forgot Password?</button>
+        </div>
+
+        <p
+          class="form-message"
+          id="login-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+        
+        <button class="primary-button" id="login-button" type="submit">
+          Sign-In
+        </button>
+
+        <p class="form-footer">
+          Secure access to your <strong>COURSIFY</strong> workspace.
+        </p>
+      </form>
+    </section>
+
+    <footer class="page-footer">
+      © <span id="current-year"></span> COURSIFY. All rights reserved.
+    </footer>
+  </main>
+
+</body>
+</html>
