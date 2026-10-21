@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>COURSIFY | Home</title>
+    <meta
+        name="description"
+        content="COURSIFY - Discover, register, and manage your courses all in one place."
+    >
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="index-styles.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         Header
+    ========================== -->
+    <header class="site-header">
+
+        <div class="header-content">
+
+            <!-- Hamburger Menu -->
+            <button
+                type="button"
+                class="menu-button"
+                id="menuButton"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <!-- Brand -->
+            <a href="index.html" class="brand">
+                COURSIFY
+            </a>
+
+
+            <!-- Auth Actions -->
+            <div class="auth-actions">
+
+                <a href="../login/login.html" class="login-link" target="_blank">
+                    Login
+                </a>
+
+                <a href="../sign-up/sign-up.html" class="signup-button" target="_blank">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Mobile Navigation -->
+        <nav
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-hidden="true"
+        >
+            <a href="index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="../login/login.html" target="_blank">Login</a>
+            <a href="../sign-up/sign-up.html" target="_blank">Sign Up</a>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         Hero / Main Section
+    ========================== -->
+    <main class="main-content">
+
+        <section class="hero-section">
+
+            <span class="hero-badge">
+                Online Course Platform
+            </span>
+
+            <h1>
+                Learn new skills,
+                <span>on your own schedule.</span>
+            </h1>
+
+            <p class="hero-text">
+                COURSIFY brings course discovery, registration, and
+                profile management together in one simple platform.
+                Create an account, explore what's available, and start
+                learning in minutes.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="../sign-up/sign-up.html" class="primary-button">
+                    Get Started
+                </a>
+
+                <a href="../login/login.html" class="secondary-button">
+                    I already have an account
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Feature Cards
+        ========================== -->
+        <section class="features-section" id="features">
+
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">01</div>
+                <h3>Browse Courses</h3>
+                <p>
+                    Explore a growing catalog of courses across
+                    technical and non-technical categories.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">02</div>
+                <h3>Register Instantly</h3>
+                <p>
+                    Sign up for any course in a couple of clicks,
+                    no paperwork or waiting required.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" aria-hidden="true">03</div>
+                <h3>Manage Your Profile</h3>
+                <p>
+                    Keep track of your registered courses and
+                    account details from a single dashboard.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         About Section
+    ========================== -->
+    <section class="about-section" id="about">
+
+        <div class="about-content">
+
+            <span class="section-label">
+                COURSIFY
+            </span>
+
+            <h2>
+                Learn. Grow. Succeed.
+            </h2>
+
+            <p>
+                Whether you're picking up a new technical skill or
+                exploring something entirely new, COURSIFY makes it
+                easy to find the right course and get started right away.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+    <footer class="site-footer">
+
+        <div class="footer-content">
+
+            <span class="footer-brand">COURSIFY</span>
+
+            <a
+                href=""
+                class="github-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit GitHub profile"
+            >
+                <svg
+                    class="github-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57
+                        0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695
+                        -.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99
+                        .105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225
+                        -.12-.3-.535-1.53.115-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3
+                        .405c2.295-1.56 3.3-1.23 3.3-1.23.65 1.65.235 2.88.115 3.18.765.84 1.23 1.905 1.23 3.225
+                        0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3
+                        0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/>
+                </svg>
+
+                <span class="github-username">github.com/your-username</span>
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="index-script.js"></script>
+
+</body>
+</html>
