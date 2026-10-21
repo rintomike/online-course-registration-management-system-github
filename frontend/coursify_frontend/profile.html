@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>COURSIFY | Profile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="profile-page">
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <div class="avatar-container">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-name" id="sidebarProfileName">Student</div>
+                <a href="edit-profile.html" class="edit-profile"><i class="fa-solid fa-pen-to-square"></i> Edit your profile</a>
+                <br>
+                <a href="profile.html" class="edit-profile"><i class="fa-solid fa-user"></i> View full profile</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Student Dashboard</div>
+                <ul class="nav-list">
+                    <li><a href="dashboard.html#your-courses" class="nav-item"><i class="fa-solid fa-book-open"></i> Your Courses</a></li>
+                    <li><a href="dashboard.html#show-all-courses" class="nav-item"><i class="fa-solid fa-layer-group"></i> Show All Courses</a></li>
+                    <li><a href="dashboard.html#enroll-courses" class="nav-item"><i class="fa-solid fa-certificate"></i> Enroll for Courses</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="profile-main">
+            <header class="topbar">
+                <div class="brand">COURSIFY</div>
+                <div class="topbar-actions">
+                    <a href="dashboard.html" class="btn-pill"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+                </div>
+            </header>
+            <section class="profile-content">
+                <div class="profile-card">
+                    <h1 class="profile-heading">Your Profile</h1>
+                    <p class="profile-subheading" id="profileStatus" aria-live="polite">Loading profile...</p>
+                    <div id="profileError" class="form-message error" role="alert"></div>
+                    <div class="profile-grid" id="profileGrid" hidden>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Name</span>
+                            <span class="profile-field-value" id="profileName"></span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Age</span>
+                            <span class="profile-field-value" id="profileAge"></span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Mobile Number</span>
+                            <span class="profile-field-value" id="profileMobile"></span>
+                        </div>
+                        <div class="profile-field full">
+                            <span class="profile-field-label">Address</span>
+                            <span class="profile-field-value" id="profileAddress"></span>
+                        </div>
+                    </div>
+                    <div class="profile-actions" id="profileActions" hidden>
+                        <a href="edit-profile.html" class="btn-pill"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</a>
+                        <a href="dashboard.html" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+                    </div>
+                    <div class="profile-actions" id="errorActions" hidden>
+                        <a href="dashboard.html" class="btn-pill">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <script src="profile.js"></script>
+        </body>
+        </html>
