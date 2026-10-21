@@ -17,7 +17,32 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/courses")
-public class CourseController {
+public class CourseController {   
+    private final CourseRepository courseRepository;
+    private final StudentCourseRepository studentCourseRepository;
 
+    public CourseController(CourseRepository courseRepository, StudentCourseRepository studentCourseRepository) {
+        this.courseRepository = courseRepository;
+        this.studentCourseRepository = studentCourseRepository;
+    }
+
+    // GET /api/courses  -> list all available courses
+    @GetMapping
+    public ResponseEntity<List<Course>> allCourses() {
+        return ResponseEntity.ok(courseRepository.findAll());
+    }
+
+    // POST /api/courses/register
+    // body: { "studentName": "...", "courseId": 3 }
+    @PostMapping("/register")
+    public ResponseEntity<?> registerForCourse(@Valid @RequestBody CourseEnrollRequest req) {
+        boolean courseExists = courseRepository.existsByCourseId(req.getCourseId());
+        if (!courseExists) {
+            return ResponseEntity.status(404).body(Map.of("status", "course not found"));
+        }
+        StudentCourse sc = new StudentCourse(req.getStudentName(), req.getCourseId());
+        studentCourseRepository.save(sc);
+        return ResponseEntity.ok(Map.of("status", "registration successful"));
+    }
 
 }
