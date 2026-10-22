@@ -29,7 +29,19 @@ public class AuthController {
         this.studentRepository = studentRepository;
     }
 
-
+    // POST /api/auth/register
+    // body: { "name": "...", "age": 21, "mobileNo": "9876543210", "address": "...", "password": "..." }
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
+        Student s = new Student();
+        s.setName(req.getName());
+        s.setAge(req.getAge());
+        s.setMobileNo(req.getMobileNo());
+        s.setAddress(req.getAddress());
+        s.setPassword(req.getPassword());
+        Student saved = studentRepository.save(s);
+        return ResponseEntity.ok(Map.of("status", "registered", "studentId", saved.getId()));
+    }
 
     // POST /api/auth/signup
     // body: { "username": "...", "password": "..." }
@@ -58,6 +70,19 @@ public class AuthController {
         return ResponseEntity.status(401).body(Map.of("status", "invalid credentials"));
     } 
 
+    // POST /api/auth/forgot-password
+    // body: { "name": "...", "mobileNo": "...", "newPassword": "..." }
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest req) {
+        Optional<Student> student = studentRepository.findByNameAndMobileNo(req.getName(), req.getMobileNo());
+        if (student.isEmpty()) {
+            return ResponseEntity.status(404).body(Map.of("status", "no matching record"));
+        }
+        Student s = student.get();
+        s.setPassword(req.getNewPassword());
+        studentRepository.save(s);
+        return ResponseEntity.ok(Map.of("status", "password updated"));
+    }    
 
 
     // GET /api/auth/profile/{name} (new one)
