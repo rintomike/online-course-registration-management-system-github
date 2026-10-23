@@ -37,12 +37,20 @@
         <div class="main-wrapper">
             <header class="topbar">
                 <div class="brand">COURSIFY</div>
-                <div class="topbar-actions">
-                    <button class="icon-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button class="icon-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i></button>
-                    <a href="#" class="logout-link" id="logoutLink">Log out</a>
-                    <button class="btn-pill" id="exploreCoursesButton"><i class="fa-solid fa-plus"></i> Explore All Courses</button>
-                </div>
+                    <div class="topbar-actions">
+                        <div class="search-box" style="display:flex; align-items:center; background:#f1f5f9; border-radius:999px; padding:4px 14px;">
+                            <i class="fa-solid fa-magnifying-glass" style="color:#64748b; margin-right:8px;"></i>
+                            <input
+                                type="search"
+                                id="courseSearchInput"
+                                placeholder="Search courses or type..."
+                                style="border:none; background:transparent; outline:none; font-size:14px; width:180px;"
+                            >
+                        </div>
+                        <button class="icon-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i></button>
+                        <a href="#" class="logout-link" id="logoutLink">Log out</a>
+                        <button class="btn-pill" id="exploreCoursesButton"><i class="fa-solid fa-plus"></i> Explore All Courses</button>
+                    </div>
             </header>
             <main class="dashboard-content">
                 <section class="dashboard-view active" id="show-all-courses">

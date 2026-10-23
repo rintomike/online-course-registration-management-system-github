@@ -278,3 +278,19 @@ window.addEventListener('hashchange', () => {
 document.addEventListener('DOMContentLoaded', () =>
     openTab(['show-all-courses', 'enroll-courses', 'your-courses'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'show-all-courses')
 );
+
+const searchInput = document.getElementById('courseSearchInput');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        const activeView = document.querySelector('.dashboard-view.active');
+        if (!activeView) return;
+
+        activeView.querySelectorAll('.course-card').forEach(cardEl => {
+            const title = cardEl.querySelector('.course-title')?.textContent.toLowerCase() || '';
+            const type = cardEl.querySelector('.course-type span')?.textContent.toLowerCase() || '';
+            const matches = title.includes(query) || type.includes(query);
+            cardEl.style.display = matches ? '' : 'none';
+        });
+    });
+}
