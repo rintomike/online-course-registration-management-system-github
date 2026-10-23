@@ -61,13 +61,13 @@ function card(c, mode = 'all') {
                 <div class="enroll-error" hidden></div>
             </div>
          `: ''}
-        ${isYourCoursesTab ? `
-            <div class="enroll-area">
-                <button type="button" class="btn-enroll enrolled" disabled>
-                    Enrolled <i class="fa-solid fa-check"></i>
-                </button>
-            </div>
-         `: ''}
+            ${isYourCoursesTab ? `
+        <div class="enroll-area">
+            <button type="button" class="btn-enroll btn-unenroll">
+                Cancel Enrollment <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    `: ''}
     `;
 
     el.querySelector('.course-title').textContent = c.courseName ?? 'Unnamed Course';
@@ -79,7 +79,38 @@ function card(c, mode = 'all') {
         const e = el.querySelector('.enroll-error');
         b.addEventListener('click', () => enrollCourse(el, b, e));
     }
+
+        if (isYourCoursesTab) {
+        const unenrollBtn = el.querySelector('.btn-unenroll');
+        unenrollBtn.addEventListener('click', async () => {
+            if (!confirm(`Cancel your enrollment in "${c.courseName}"?`)) return;
+            unenrollBtn.disabled = true;
+            unenrollBtn.textContent = 'Cancelling...';
+            
+            try {
+                const res = await fetch(
+                    `${API_BASE}/courses/unenroll?studentName=${encodeURIComponent(username)}&courseId=${c.courseId}`,
+                    { method: 'DELETE' }
+                );
+                if (res.ok) {
+                    enrolledCourseIds.delete(Number(c.courseId));
+                    await loadYourCourses(); // Refresh Your Courses tab instantly
+                } else {
+                    alert('Unable to cancel enrollment.');
+                    unenrollBtn.disabled = false;
+                    unenrollBtn.innerHTML = 'Cancel Enrollment <i class="fa-solid fa-xmark"></i>';
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Server error while cancelling enrollment.');
+                unenrollBtn.disabled = false;
+                unenrollBtn.innerHTML = 'Cancel Enrollment <i class="fa-solid fa-xmark"></i>';
+            }
+        });
+    }
+    
     return el;
+
 }
 
 // Fetch enrolled courses from the backend for the logged-in student

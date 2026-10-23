@@ -7,6 +7,7 @@ import com.coursereg.repository.CourseRepository;
 import com.coursereg.repository.StudentCourseRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,6 +59,15 @@ public class CourseController {
 
         List<Course> enrolledCourses = courseRepository.findAllById(courseIds);
         return ResponseEntity.ok(enrolledCourses);
+    }
+
+    @DeleteMapping("/unenroll")
+    @Transactional 
+    public ResponseEntity<?> unenrollCourse(
+            @RequestParam String studentName,
+            @RequestParam Integer courseId) {
+        studentCourseRepository.deleteByStudentNameAndCourseId(studentName, courseId);
+        return ResponseEntity.ok(Map.of("status", "Enrollment cancelled successfully"));
     }
 
 }

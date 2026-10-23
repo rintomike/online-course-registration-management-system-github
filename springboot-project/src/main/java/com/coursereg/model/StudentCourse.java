@@ -19,6 +19,9 @@ public class StudentCourse {
     @Column(name = "course_id")
     private Integer courseId;
 
+    @Column(name = "status")
+    private String status = "PENDING"; // Default status when student registers
+
     public StudentCourse() {}
 
     public StudentCourse(String studentName, Integer courseId) {
@@ -34,4 +37,7 @@ public class StudentCourse {
 
     public Integer getCourseId() { return courseId; }
     public void setCourseId(Integer courseId) { this.courseId = courseId; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
