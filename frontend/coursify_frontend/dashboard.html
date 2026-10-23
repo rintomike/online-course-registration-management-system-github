@@ -58,10 +58,12 @@
                 </section>
                 <section class="dashboard-view" id="your-courses">
                     <h1 class="page-title">Your Courses</h1>
-                    <div class="empty-state">
+                    <div class="section-status" id="yourCoursesStatus" aria-live="polite"></div>
+                    <div class="course-grid" id="yourCoursesGrid"></div>
+                    <div class="empty-state" id="yourCoursesEmpty" hidden>
                         <i class="fa-solid fa-book-open"></i>
-                        <h2>Your enrolled courses</h2>
-                        <p>Course enrollment details can be shown here when the backend provides a student-course endpoint.</p>
+                        <h2>No enrolled courses yet</h2>
+                        <p>You haven't enrolled in any courses yet. Browse our catalog to get started!</p>
                         <button class="btn-pill" id="browseCoursesFromYourCourses"><i class="fa-solid fa-layer-group"></i> Browse Courses</button>
                     </div>
                 </section>

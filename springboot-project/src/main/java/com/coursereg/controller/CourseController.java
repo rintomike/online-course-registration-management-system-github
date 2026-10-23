@@ -45,4 +45,19 @@ public class CourseController {
         return ResponseEntity.ok(Map.of("status", "registration successful"));
     }
 
+    
+    @GetMapping("/student/{studentName}")
+    public ResponseEntity<?> getEnrolledCourses(@PathVariable String studentName) {
+        // 1. Find all enrollments for this student
+        List<StudentCourse> enrollments = studentCourseRepository.findByStudentName(studentName);
+
+        // 2. Extract the courseIds (as Integer) and return the matching Course objects
+        List<Integer> courseIds = enrollments.stream()
+                .map(StudentCourse::getCourseId)
+                .toList();
+
+        List<Course> enrolledCourses = courseRepository.findAllById(courseIds);
+        return ResponseEntity.ok(enrolledCourses);
+    }
+
 }
