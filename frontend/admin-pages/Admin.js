@@ -437,5 +437,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial load from Spring Boot backend
     loadCourses();
+    loadEnrollments();
+
+    async function loadEnrollments() {
+      const enrollmentList = document.getElementById("enrollment-list");
+      if (!enrollmentList) return;
+
+      const res = await fetch(`${API_BASE}/admin/enrollments`);
+      if (!res.ok) return;
+      const enrollments = await res.json();
+
+      enrollmentList.replaceChildren();
+      if (enrollments.length === 0) {
+        enrollmentList.innerHTML = `<div class="empty-state"><p>No student enrollments yet.</p></div>`;
+        return;
+      }
+
+      enrollments.forEach(item => {
+        const row = document.createElement("article");
+        row.className = "course-row";
+        row.innerHTML = `
+          <div class="course-icon">${item.studentName.charAt(0).toUpperCase()}</div>
+          <div class="course-info">
+            <h3 class="course-name">${item.studentName} → ${item.courseName}</h3>
+            <p class="course-meta">
+              <span class="course-type-badge">${item.status}</span>
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            ${item.status !== "APPROVED" ? `<button class="outline-button approve-btn" type="button">Approve ✓</button>` : ""}
+            <button class="delete-button reject-btn" type="button">Reject ✕</button>
+          </div>
+        `;
+
+        row.querySelector(".approve-btn")?.addEventListener("click", async () => {
+          await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=APPROVED`, { method: "PUT" });
+          loadEnrollments();
+        });
+
+        row.querySelector(".reject-btn")?.addEventListener("click", async () => {
+          await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=REJECTED`, { method: "PUT" });
+          loadEnrollments();
+        });
+
+        enrollmentList.appendChild(row);
+      });
+    }
+    
   }
 });
