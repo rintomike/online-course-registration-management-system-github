@@ -1,4 +1,4 @@
-[Project README.md](https://github.com/user-attachments/files/33889227/Project.README.md)
+[Project README.md](https://github.com/user-attachments/files/33900542/Project.README.md)
 # 🎓 COURSIFY — Online Course Registration & Management System
 
 **COURSIFY** is a full-stack web application designed to streamline academic course browsing, student enrollment, profile management, and administrative catalog control. Built with a **Java Spring Boot** REST API backend, **MySQL** relational database, and a responsive **Vanilla HTML5, CSS3, and JavaScript** frontend, the system features distinct, role-tailored workspaces for both **Students** (Blue theme) and **Administrators** (Orange theme).
@@ -51,10 +51,11 @@ online-course-registration-management-system/
 ├── README.md                           # Project documentation
 ├── frontend/                           # Frontend static web application
 │   ├── home-page/                      # Main Landing Page (index.html, index-styles.css, index-script.js)
-│   ├── login/                          # Student Login & Forgot Password pages
+│   ├── login/                          # Student Login
 │   ├── sign-up/                        # Student Account Registration page
+│   ├── forgot-password-page/           # Password recovery interface
 │   ├── coursify_frontend/              # Student Dashboard, Profile, and Edit Profile pages
-│   └── admin/                          # Orange-themed Admin Login & Admin Dashboard pages
+│   └── admin/                          # Orange-themed Admin Home page, Login page & Admin Dashboard pages
 └── springboot-project/                 # Spring Boot REST API Backend
     ├── pom.xml                         # Maven dependencies & build configuration
     └── src/main/
@@ -133,9 +134,8 @@ CREATE DATABASE IF NOT EXISTS coursereg;
 Navigate to `springboot-project/src/main/resources/`. Copy `env.example.properties` and rename the copy to **`env.properties`** (this file is ignored by Git for security):
 
 ```properties
-ADMIN_NAME=your_admin_name
+ADMIN_NAME=admin
 ADMIN_PASSWORD=your_secure_admin_password
-DB_USERNAME=your_mysql_database_username
 DB_PASSWORD=your_mysql_root_password
 ```
 Make sure `application.properties` imports this file via:
