@@ -134,7 +134,7 @@ CREATE DATABASE IF NOT EXISTS coursereg;
 Navigate to `springboot-project/src/main/resources/`. Copy `env.example.properties` and rename the copy to **`env.properties`** (this file is ignored by Git for security):
 
 ```properties
-ADMIN_NAME=admin
+ADMIN_NAME=your_secure_admin_username
 ADMIN_PASSWORD=your_secure_admin_password
 DB_PASSWORD=your_mysql_root_password
 ```
