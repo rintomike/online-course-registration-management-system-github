@@ -55,7 +55,7 @@ online-course-registration-management-system/
 │   ├── sign-up/                        # Student Account Registration page
 │   ├── forgot-password-page/           # Password recovery interface
 │   ├── coursify_frontend/              # Student Dashboard, Profile, and Edit Profile pages
-│   └── admin/                          # Orange-themed Admin Home page, Login page & Admin Dashboard pages
+│   └── admin-pages/                    # Orange-themed Admin Home page, Login page & Admin Dashboard pages
 └── springboot-project/                 # Spring Boot REST API Backend
     ├── pom.xml                         # Maven dependencies & build configuration
     └── src/main/
@@ -119,14 +119,14 @@ online-course-registration-management-system/
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-username/online-course-registration-management-system.git
+git clone https://github.com/rintomike/online-course-registration-management-system-github.git
 cd online-course-registration-management-system
 ```
 
 ### Step 2: Configure the MySQL Database
 Open your MySQL client (MySQL Workbench or CLI) and create the database:
 ```sql
-CREATE DATABASE IF NOT EXISTS coursereg;
+CREATE DATABASE IF NOT EXISTS stdcourse;
 ```
 *(Spring Data JPA / Hibernate will automatically generate and update the tables `allinfo`, `allcourse`, and `student_course` when the backend starts).*
 
