@@ -439,49 +439,96 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCourses();
     loadEnrollments();
 
-    async function loadEnrollments() {
+   async function loadEnrollments() {
       const enrollmentList = document.getElementById("enrollment-list");
       if (!enrollmentList) return;
 
-      const res = await fetch(`${API_BASE}/admin/enrollments`);
-      if (!res.ok) return;
-      const enrollments = await res.json();
+      try {
+        const res = await fetch(`${API_BASE}/admin/enrollments`);
+        if (!res.ok) return;
+        const enrollments = await res.json();
 
-      enrollmentList.replaceChildren();
-      if (enrollments.length === 0) {
-        enrollmentList.innerHTML = `<div class="empty-state"><p>No student enrollments yet.</p></div>`;
-        return;
+        enrollmentList.replaceChildren();
+        
+        if (enrollments.length === 0) {
+          // Utilizes the exact empty-state styles from Admin.css
+          const emptyState = document.createElement("div");
+          emptyState.className = "empty-state";
+          emptyState.innerHTML = `
+            <div class="empty-state-icon" aria-hidden="true">👥</div>
+            <h3>No enrollments yet</h3>
+            <p>Student course registrations will appear here.</p>
+          `;
+          enrollmentList.appendChild(emptyState);
+          return;
+        }
+
+        enrollments.forEach(item => {
+          const row = document.createElement("article");
+          row.className = "course-row";
+          
+          const isPending = item.status === "PENDING";
+          const isApproved = item.status === "APPROVED";
+          const isRejected = item.status === "REJECTED";
+
+          // Generates the layout mimicking your existing course rows
+          row.innerHTML = `
+            <div class="course-icon" aria-hidden="true">${item.studentName.charAt(0).toUpperCase()}</div>
+            <div class="course-info">
+              <h3 class="course-name">${item.studentName} → ${item.courseName}</h3>
+              <p class="course-meta">
+                <span class="course-type-badge">${item.status}</span>
+              </p>
+            </div>
+            <div class="action-buttons" style="display: flex; gap: 8px; align-items: center;">
+              ${!isApproved ? `<button class="outline-button approve-btn" type="button">Approve ✓</button>` : ""}
+              ${!isRejected ? `<button class="outline-button reject-btn" type="button">Reject ✕</button>` : ""}
+            </div>
+          `;
+
+          row.querySelector(".approve-btn")?.addEventListener("click", async () => {
+            await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=APPROVED`, { method: "PUT" });
+            loadEnrollments();
+          });
+
+          row.querySelector(".reject-btn")?.addEventListener("click", async () => {
+            await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=REJECTED`, { method: "PUT" });
+            loadEnrollments();
+          });
+
+          // Appends the Delete button only if the status is resolved
+          if (isApproved || isRejected) {
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-button"; 
+            deleteBtn.innerHTML = "Delete";
+            deleteBtn.setAttribute("aria-label", "Delete enrollment history");
+            
+            deleteBtn.addEventListener("click", async () => {
+              if (!confirm("Permanently delete this enrollment history?")) return;
+              
+              try {
+                const response = await fetch(`${API_BASE}/admin/enrollments/${item.id}`, {
+                  method: "DELETE"
+                });
+                
+                if (response.ok) {
+                  loadEnrollments(); 
+                } else {
+                  alert("Failed to delete enrollment history.");
+                }
+              } catch (error) {
+                console.error("Delete failed:", error);
+              }
+            });
+
+            row.querySelector(".action-buttons").appendChild(deleteBtn);
+          }
+
+          enrollmentList.appendChild(row);
+        });
+      } catch (error) {
+        console.error("Error loading enrollments:", error);
       }
-
-      enrollments.forEach(item => {
-        const row = document.createElement("article");
-        row.className = "course-row";
-        row.innerHTML = `
-          <div class="course-icon">${item.studentName.charAt(0).toUpperCase()}</div>
-          <div class="course-info">
-            <h3 class="course-name">${item.studentName} → ${item.courseName}</h3>
-            <p class="course-meta">
-              <span class="course-type-badge">${item.status}</span>
-            </p>
-          </div>
-          <div style="display:flex; gap:8px;">
-            ${item.status !== "APPROVED" ? `<button class="outline-button approve-btn" type="button">Approve ✓</button>` : ""}
-            <button class="delete-button reject-btn" type="button">Reject ✕</button>
-          </div>
-        `;
-
-        row.querySelector(".approve-btn")?.addEventListener("click", async () => {
-          await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=APPROVED`, { method: "PUT" });
-          loadEnrollments();
-        });
-
-        row.querySelector(".reject-btn")?.addEventListener("click", async () => {
-          await fetch(`${API_BASE}/admin/enrollments/${item.id}/status?status=REJECTED`, { method: "PUT" });
-          loadEnrollments();
-        });
-
-        enrollmentList.appendChild(row);
-      });
     }
     
   }

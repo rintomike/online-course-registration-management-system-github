@@ -115,5 +115,16 @@ public class AdminController {
                 .body(Map.of("error", "Enrollment not found")));
     }    
 
+    //to delete enrollment history
+    @DeleteMapping("/enrollments/{id}")
+    @Transactional
+    public ResponseEntity<?> deleteEnrollment(@PathVariable Integer id) {
+        return studentCourseRepository.findById(id).map(enrollment -> {
+            studentCourseRepository.delete(enrollment);
+            return ResponseEntity.ok(Map.of("status", "Enrollment history deleted"));
+        }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "Enrollment not found")));
+    }
+
 
 }
